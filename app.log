@@ -1,0 +1,65 @@
+14:24:07.600 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+14:24:08.611 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+14:24:09.626 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+14:24:10.635 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+14:24:11.647 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+14:24:12.659 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+14:33:41.517 [main] INFO  org.example.AutomaticRegistration - Открыта страница регистрации на игру.
+14:33:41.534 [main] INFO  org.example.AutomaticRegistration - Найден элемент с текстом 'Классика'. Нажимаем на кнопку 'Зарегистрироваться'.
+14:34:37.524 [main] INFO  org.example.AutomaticRegistration - Открыта страница регистрации на игру.
+14:34:37.540 [main] INFO  org.example.AutomaticRegistration - Найден элемент с текстом 'Классика'. Нажимаем на кнопку 'Зарегистрироваться'.
+14:34:39.526 [main] WARN  org.example.AutomaticRegistration - Кнопка Зарегистрироваться не кликабельна
+14:38:46.697 [main] INFO  org.example.AutomaticRegistration - Открыта страница регистрации на игру.
+14:38:46.713 [main] INFO  org.example.AutomaticRegistration - Найден элемент с текстом 'Классика'. Нажимаем на кнопку 'Зарегистрироваться'.
+14:39:58.081 [main] INFO  org.example.AutomaticRegistration - Открыта страница регистрации на игру.
+14:39:58.098 [main] INFO  org.example.AutomaticRegistration - Найден элемент с текстом 'Классика'. Нажимаем на кнопку 'Зарегистрироваться'.
+14:40:00.596 [main] WARN  org.example.AutomaticRegistration - Кнопка Зарегистрироваться не кликабельна
+14:57:47.449 [main] INFO  org.example.AutomaticRegistration - Открыта страница регистрации на игру.
+14:57:47.463 [main] INFO  org.example.AutomaticRegistration - Найден элемент с текстом 'Классика'.
+14:57:47.513 [main] INFO  org.example.AutomaticRegistration - Нажат элемент входа в личный кабинет.
+14:57:47.582 [main] INFO  org.example.AutomaticRegistration - Введена электронная почта.
+14:57:47.637 [main] INFO  org.example.AutomaticRegistration - Введен пароль.
+14:57:47.674 [main] INFO  org.example.AutomaticRegistration - Нажата кнопка 'Войти'.
+14:57:49.180 [main] INFO  org.example.AutomaticRegistration - Ждем 1.5 секунды
+14:57:49.443 [main] INFO  org.example.AutomaticRegistration - Нажат элемент 'Мозгобойня'
+14:57:49.445 [main] INFO  org.example.AutomaticRegistration - Ждем 2 секунды
+14:57:50.003 [main] INFO  org.example.AutomaticRegistration - Найдена кнопка 'Зарегистрироваться'
+14:57:50.010 [main] WARN  org.example.AutomaticRegistration - Кнопка Зарегистрироваться не кликабельна
+15:20:46.758 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:47.763 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:48.777 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:49.778 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:50.781 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:51.794 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:52.807 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:53.823 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:54.828 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:55.840 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:56.848 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:57.863 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:58.868 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:20:59.880 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:00.889 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:01.894 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:02.910 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:03.925 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:04.938 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:05.944 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:06.955 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:07.965 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:08.978 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:09.993 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:11.006 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:12.011 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:13.025 [main] INFO  org.example.AutomaticRegistration - Еще не время для регистрации.
+15:21:21.975 [main] INFO  org.example.AutomaticRegistration - Открыта страница регистрации на игру.
+15:21:21.999 [main] INFO  org.example.AutomaticRegistration - Найден элемент с текстом 'Классика'.
+15:21:22.043 [main] INFO  org.example.AutomaticRegistration - Нажат элемент входа в личный кабинет.
+15:21:22.131 [main] INFO  org.example.AutomaticRegistration - Введена электронная почта.
+15:21:22.187 [main] INFO  org.example.AutomaticRegistration - Введен пароль.
+15:21:22.230 [main] INFO  org.example.AutomaticRegistration - Нажата кнопка 'Войти'.
+15:21:23.732 [main] INFO  org.example.AutomaticRegistration - Ждем 1.5 секунды
+15:21:23.945 [main] INFO  org.example.AutomaticRegistration - Нажат элемент 'Мозгобойня'
+15:21:23.947 [main] INFO  org.example.AutomaticRegistration - Ждем 2 секунды
+15:21:23.971 [main] INFO  org.example.AutomaticRegistration - Найдена кнопка 'Зарегистрироваться'
+15:21:23.990 [main] WARN  org.example.AutomaticRegistration - Кнопка Зарегистрироваться не кликабельна
