@@ -42,7 +42,7 @@ public class AutomaticRegistration {
         LocalDateTime now = LocalDateTime.now();
 
         // Проверка, является ли сегодня понедельником и время 18:30
-        if (now.getDayOfWeek() == DayOfWeek.FRIDAY && now.getHour() == 15 && now.getMinute() == 38) {
+        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 0) {
             // Открытие страницы для регистрации на игру
             driver.get("https://vtb.mzgb.net/");
             logger.info("Открыта страница регистрации на игру.");
