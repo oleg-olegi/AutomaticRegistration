@@ -2,10 +2,7 @@ package org.example;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -45,7 +42,7 @@ public class AutomaticRegistration {
         LocalDateTime now = LocalDateTime.now();
 
         // Проверка, является ли сегодня понедельником и время 18:30
-        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 0) {
+        if (now.getDayOfWeek() == DayOfWeek.FRIDAY && now.getHour() == 15 && now.getMinute() == 38) {
             // Открытие страницы для регистрации на игру
             driver.get("https://vtb.mzgb.net/");
             logger.info("Открыта страница регистрации на игру.");
@@ -85,38 +82,36 @@ public class AutomaticRegistration {
                 element.click();
                 logger.info("Нажат элемент 'Мозгобойня'");
 
-//нажать кнопку запись в резерв
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-                logger.info("Ждем 2 секунды");
-                WebElement reserveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By
-                        .xpath("//button[contains(text(), 'Зарегистрироваться')]")));
-                logger.info("Найдена кнопка 'Зарегистрироваться'");
-                if (reserveButton.isEnabled()) {
-                    logger.info("Кнопка Зарегистрироваться кликабельна");
+//нажать кнопку зарегистрироваться
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+                logger.info("Ждем 1 секунду");
+
+                WebElement reserveButton = null;
+                boolean buttonClickable = false;
+                int attempts = 0;
+                while (!buttonClickable && attempts < 5) { // Повторяем попытку до 3 раз
+                    try {
+                        reserveButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Зарегистрироваться')]")));
+                        buttonClickable = true;
+                    } catch (TimeoutException e) {
+                        logger.warn("Кнопка 'Зарегистрироваться' не кликабельна. Пробуем еще раз...");
+                        attempts++;
+                    }
+                }
+
+                if (buttonClickable && reserveButton != null) {
+                    logger.info("Кнопка 'Зарегистрироваться' найдена и кликабельна");
                     JavascriptExecutor executor = (JavascriptExecutor) driver;
                     executor.executeScript("arguments[0].scrollIntoView(true);", reserveButton);
                     reserveButton.click();
-                    logger.info("Кнопка Зарегистрироваться нажата");
+                    logger.info("Кнопка 'Зарегистрироваться' нажата");
                 } else {
-                    logger.warn("Кнопка Зарегистрироваться не кликабельна");
+                    logger.error("Не удалось найти или нажать кнопку 'Зарегистрироваться'");
                 }
-
-//                try {
-//                    Thread.sleep(2000); // Подождать 2 секунды
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
 
                 //нажать далее
                 WebElement moveButton = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
                 moveButton.click();
-
-//                try {
-//                    Thread.sleep(2000); // Подождать 2 секунды
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
 
                 // Найти элемент с атрибутом src="/img/icons/plus.svg" и нажать на него 4 раза
                 WebElement plusIcon = driver.findElement(By.cssSelector("img[src='/img/icons/plus.svg']"));
@@ -124,21 +119,8 @@ public class AutomaticRegistration {
                     plusIcon.click();
                 }
 
-//                try {
-//                    Thread.sleep(2000); // Подождать 2 секунды
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-
-
                 WebElement moveButton1 = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
                 moveButton1.click();
-
-//                try {
-//                    Thread.sleep(2000); // Подождать 2 секунды
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
 
                 WebElement registration = driver.findElement(By.xpath("//button[contains(text(), 'Регистрация на игру')]"));
                 registration.click();
