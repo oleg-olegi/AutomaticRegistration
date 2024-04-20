@@ -37,12 +37,12 @@ public class AutomaticRegistration {
         }
     }
 
-    private static void scheduleTask(WebDriver driver) {
+    private static void scheduleTask(WebDriver driver) throws InterruptedException {
         // Создание объекта для текущей даты и времени
         LocalDateTime now = LocalDateTime.now();
 
         // Проверка, является ли сегодня понедельником и время 18:30
-        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 0) {
+        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 00) {
             // Открытие страницы для регистрации на игру
             driver.get("https://vtb.mzgb.net/");
             logger.info("Открыта страница регистрации на игру.");
@@ -52,9 +52,14 @@ public class AutomaticRegistration {
 
             // Если элемент с текстом найден, нажать на кнопку "Запись в резерв"
             if (elementWithText != null) {
-                logger.info("Найден элемент с текстом 'Классика'.");
+                logger.info("Найден элемент с текстом 'Туц Туц'.");
 //аккаунт
-                WebElement accountIcon = driver.findElement(By.xpath("//div[contains(@class, 'rounded-full') and contains(@class, 'w-8') and contains(@class, 'h-8') and contains(@class, 'ml-3') and contains(@class, 'flex') and contains(@class, 'flex-row') and contains(@class, 'items-center') and contains(@class, 'justify-center') and contains(@class, 'overflow-hidden') and contains(@class, 'border-white')]//img[@alt='']"));
+                WebElement accountIcon = driver.findElement(By.xpath(
+                        "//div[contains(@class, 'rounded-full') and contains(@class, 'w-8')" +
+                                " and contains(@class, 'h-8') and contains(@class, 'ml-3') and contains(@class, 'flex')" +
+                                " and contains(@class, 'flex-row') and contains(@class, 'items-center')" +
+                                " and contains(@class, 'justify-center') and contains(@class, 'overflow-hidden')" +
+                                " and contains(@class, 'border-white')]//img[@alt='']"));
                 accountIcon.click();
                 logger.info("Нажат элемент входа в личный кабинет.");
 //ввод мыла
@@ -69,13 +74,10 @@ public class AutomaticRegistration {
                 WebElement enterButton = driver.findElement(By.xpath("//button[contains(text(), 'Войти')]"));
                 enterButton.click();
                 logger.info("Нажата кнопка 'Войти'.");
+//ждем пока откроется новая страница
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+                wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(driver.getCurrentUrl())));
 
-                try {
-                    Thread.sleep(1500); // Подождать 1 секунду
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                logger.info("Ждем 1.5 секунды");
                 // Находим элемент по CSS-селектору(мозгобойня)
                 WebElement element = driver.findElement(By.cssSelector(
                         "body > nav > div > div.flex.flex-row.items-center > div:nth-child(1) > a"));
@@ -83,31 +85,17 @@ public class AutomaticRegistration {
                 logger.info("Нажат элемент 'Мозгобойня'");
 
 //нажать кнопку зарегистрироваться
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+                WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(1));
                 logger.info("Ждем 1 секунду");
 
-                WebElement reserveButton = null;
-                boolean buttonClickable = false;
-                int attempts = 0;
-                while (!buttonClickable && attempts < 5) { // Повторяем попытку до 3 раз
-                    try {
-                        reserveButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Зарегистрироваться')]")));
-                        buttonClickable = true;
-                    } catch (TimeoutException e) {
-                        logger.warn("Кнопка 'Зарегистрироваться' не кликабельна. Пробуем еще раз...");
-                        attempts++;
-                    }
-                }
+                WebElement reserveButton = driver.findElement(By.xpath(
+                        "//button[contains(text(), 'Зарегистрироваться')]"));
 
-                if (buttonClickable && reserveButton != null) {
-                    logger.info("Кнопка 'Зарегистрироваться' найдена и кликабельна");
-                    JavascriptExecutor executor = (JavascriptExecutor) driver;
-                    executor.executeScript("arguments[0].scrollIntoView(true);", reserveButton);
-                    reserveButton.click();
-                    logger.info("Кнопка 'Зарегистрироваться' нажата");
-                } else {
-                    logger.error("Не удалось найти или нажать кнопку 'Зарегистрироваться'");
-                }
+                JavascriptExecutor executor = (JavascriptExecutor) driver;
+                executor.executeScript("arguments[0].scrollIntoView(true);", reserveButton);
+                reserveButton.click();
+                logger.info("Кнопка 'Зарегистрироваться' нажата");
+
 
                 //нажать далее
                 WebElement moveButton = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
