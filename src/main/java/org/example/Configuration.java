@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Configuration {
-    private static final String CONFIG_FILE = "config.properties";
+    private static final String CONFIG_FILE = "c:/Users/trash/IdeaProjects/AutomaticRegistration/config.properties";
     private static final Properties properties;
 
     static {

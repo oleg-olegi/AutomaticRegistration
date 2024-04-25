@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.DayOfWeek;
@@ -41,53 +40,41 @@ public class AutomaticRegistration {
         // Создание объекта для текущей даты и времени
         LocalDateTime now = LocalDateTime.now();
 
-        // Проверка, является ли сегодня понедельником и время 18:30
-        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 00) {
-            // Открытие страницы для регистрации на игру
-            driver.get("https://vtb.mzgb.net/");
-            logger.info("Открыта страница регистрации на игру.");
+        // Открытие страницы для регистрации на игру
+        driver.get("https://vtb.mzgb.net/account");
+        logger.info("Opened page of authorisation");
 
+//ввод мыла
+        WebElement emailInput = driver.findElement(By.name("email"));
+        emailInput.sendKeys(Configuration.getEmail());
+        logger.info("Введена электронная почта.");
+//ввод пароля
+        WebElement passwordInput = driver.findElement(By.name("password"));
+        passwordInput.sendKeys(Configuration.getPassword());
+        logger.info("Введен пароль.");
+//нажать Войти
+        WebElement enterButton = driver.findElement(By.className("btn-filled"));
+        enterButton.click();
+        logger.info("Нажата кнопка 'Войти'.");
+//ждем пока откроется новая страница
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+
+        // Находим элемент по CSS-селектору(мозгобойня)
+        WebElement element = driver.findElement(By.cssSelector(
+                "body > nav > div > div.flex.flex-row.items-center > div:nth-child(1) > a"));
+        element.click();
+        logger.info("Нажат элемент 'Мозгобойня'");
+
+        // Проверка, является ли сегодня понедельником и время 18:30
+        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 00 && now.getSecond()==01) {
             // Поиск элемента, содержащего текст "туц,туц"
             WebElement elementWithText = driver.findElement(By.xpath("//*[contains(text(), 'Туц Туц')]"));
 
             // Если элемент с текстом найден, нажать на кнопку "Запись в резерв"
             if (elementWithText != null) {
                 logger.info("Найден элемент с текстом 'Туц Туц'.");
-//аккаунт
-                WebElement accountIcon = driver.findElement(By.xpath(
-                        "//div[contains(@class, 'rounded-full') and contains(@class, 'w-8')" +
-                                " and contains(@class, 'h-8') and contains(@class, 'ml-3') and contains(@class, 'flex')" +
-                                " and contains(@class, 'flex-row') and contains(@class, 'items-center')" +
-                                " and contains(@class, 'justify-center') and contains(@class, 'overflow-hidden')" +
-                                " and contains(@class, 'border-white')]//img[@alt='']"));
-                accountIcon.click();
-                logger.info("Нажат элемент входа в личный кабинет.");
-//ввод мыла
-                WebElement emailInput = driver.findElement(By.id("email"));
-                emailInput.sendKeys(Configuration.getEmail());
-                logger.info("Введена электронная почта.");
-//ввод пароля
-                WebElement passwordInput = driver.findElement(By.id("password"));
-                passwordInput.sendKeys(Configuration.getPassword());
-                logger.info("Введен пароль.");
-//нажать Войти
-                WebElement enterButton = driver.findElement(By.xpath("//button[contains(text(), 'Войти')]"));
-                enterButton.click();
-                logger.info("Нажата кнопка 'Войти'.");
-//ждем пока откроется новая страница
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-                wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(driver.getCurrentUrl())));
 
-                // Находим элемент по CSS-селектору(мозгобойня)
-                WebElement element = driver.findElement(By.cssSelector(
-                        "body > nav > div > div.flex.flex-row.items-center > div:nth-child(1) > a"));
-                element.click();
-                logger.info("Нажат элемент 'Мозгобойня'");
-
-//нажать кнопку зарегистрироваться
-                WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(1));
-                logger.info("Ждем 1 секунду");
-
+                //нажать кнопку зарегистрироваться
                 WebElement reserveButton = driver.findElement(By.xpath(
                         "//button[contains(text(), 'Зарегистрироваться')]"));
 
