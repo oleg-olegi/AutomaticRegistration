@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AutomaticRegistration {
     private static final Logger logger = LogManager.getLogger(AutomaticRegistration.class);
@@ -65,7 +66,7 @@ public class AutomaticRegistration {
         LocalDateTime now = LocalDateTime.now();
 
         // Проверка, является ли сегодня понедельником и время 12.00
-        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 0 && now.getSecond() == 0) {
+        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 00) {
             driver.navigate().refresh();
             // Поиск элемента, содержащего текст "туц,туц"
             //WebElement elementWithText = driver.findElement(By.xpath("//*[contains(text(), 'Туц Туц')]"));
@@ -79,10 +80,19 @@ public class AutomaticRegistration {
             /*Проверка в цикле содержит ли кнопка атрибут
             "disabled" и попытка нажать на кнопку*/
             while (buttonFlag) {
-                WebElement registerButton = driver.findElement(By.xpath(
-                        "//button[contains(text(), 'Зарегистрироваться') and @class='h-10 w-full outline-none rounded-full font-semibold text-sm bg-additional-text text-white hover-up cursor-pointer']"));
-                registerButtonClick(registerButton, driver);
                 logger.info("Цикл проверки кнопки ЗАРЕГИСТРИРОВАТЬСЯ");
+                List<WebElement> registerButtons = driver.findElements(By.xpath(
+                        "//button[contains(text(), 'Зарегистрироваться')]"));
+
+                List<WebElement> activeButtons = registerButtons.stream()
+                        .filter(button -> button.getAttribute("disabled") == null)
+                        .toList();
+                if (activeButtons.isEmpty()) {
+                    driver.navigate().refresh();
+                    logger.info("List of active buttons is empty");
+                } else
+                    registerButtonClick(activeButtons.getFirst(), driver);
+                /*   registerButtonClick(registerButton, driver);*/
             }
 
             //нажать далее
@@ -113,10 +123,11 @@ public class AutomaticRegistration {
 
     /*Метод проверки доступности кнопки и попытка нажать на нее */
     private static void registerButtonClick(WebElement registerButton, WebDriver driver) {
-        if (registerButton != null && registerButton.getAttribute("disabled") != null) {
+      /*  if (registerButton != null && registerButton.getAttribute("disabled") != null) {
             logger.info("Кнопка ЗАРЕГИСТРИРОВАТЬСЯ НЕДОСТУПНА");
             driver.navigate().refresh();
-        } else try {
+        } else*/
+        try {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].scrollIntoView(true);", registerButton);
             assert registerButton != null;
