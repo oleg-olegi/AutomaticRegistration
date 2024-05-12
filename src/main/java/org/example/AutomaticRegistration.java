@@ -31,23 +31,23 @@ public class AutomaticRegistration {
         //ввод мыла
         WebElement emailInput = driver.findElement(By.name("email"));
         emailInput.sendKeys(Configuration.getEmail());
-        logger.info("Введена электронная почта.");
+        logger.info("Email entered.");
 
         //ввод пароля
         WebElement passwordInput = driver.findElement(By.name("password"));
         passwordInput.sendKeys(Configuration.getPassword());
-        logger.info("Введен пароль.");
+        logger.info("Password entered.");
 
         //нажать Войти
         WebElement enterButton = driver.findElement(By.className("btn-filled"));
         enterButton.click();
-        logger.info("Нажата кнопка 'Войти'.");
+        logger.info("'Login' button pressed.");
 
         // Находим элемент по CSS-селектору(мозгобойня)
         WebElement element = driver.findElement(By.cssSelector(
                 "body > nav > div > div.flex.flex-row.items-center > div:nth-child(1) > a"));
         element.click();
-        logger.info("Нажат элемент 'Мозгобойня'");
+        logger.info("'Мозгобойня' element pressed");
 
         // Периодическая проверка каждые 1 секунд
         while (flag) {
@@ -66,7 +66,7 @@ public class AutomaticRegistration {
         LocalDateTime now = LocalDateTime.now();
 
         // Проверка, является ли сегодня понедельником и время 12.00
-        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 00) {
+        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 0) {
             driver.navigate().refresh();
             // Поиск элемента, содержащего текст "туц,туц"
             //WebElement elementWithText = driver.findElement(By.xpath("//*[contains(text(), 'Туц Туц')]"));
@@ -80,38 +80,44 @@ public class AutomaticRegistration {
             /*Проверка в цикле содержит ли кнопка атрибут
             "disabled" и попытка нажать на кнопку*/
             while (buttonFlag) {
-                logger.info("Цикл проверки кнопки ЗАРЕГИСТРИРОВАТЬСЯ");
+                logger.info("Cycle of checking the 'Зарегистрироваться' button");
                 List<WebElement> registerButtons = driver.findElements(By.xpath(
                         "//button[contains(text(), 'Зарегистрироваться')]"));
-
+                logger.info("Count of buttons 'Зарегистрироваться' = {}", registerButtons.size());
                 List<WebElement> activeButtons = registerButtons.stream()
                         .filter(button -> button.getAttribute("disabled") == null)
                         .toList();
+                logger.info("Count of active buttons 'Зарегистрироваться' = {}", activeButtons.size());
                 if (activeButtons.isEmpty()) {
                     driver.navigate().refresh();
                     logger.info("List of active buttons is empty");
                 } else
                     registerButtonClick(activeButtons.getFirst(), driver);
+                logger.info("Button 'Зарегистрироваться' was clicked");
                 /*   registerButtonClick(registerButton, driver);*/
             }
 
             //нажать далее
             WebElement moveButton = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
             moveButton.click();
-
+            logger.info("Button 'Далее' was clicked");
             // Найти элемент с атрибутом src="/img/icons/plus.svg" и нажать на него 4 раза
             WebElement plusIcon = driver.findElement(By.cssSelector("img[src='/img/icons/plus.svg']"));
             for (int i = 0; i < 4; i++) {
                 plusIcon.click();
+                logger.info("Button '+' was clicked 4 times");
             }
 
             WebElement moveButton1 = driver.findElement(By.xpath("//button[contains(text(), 'Далее')]"));
             moveButton1.click();
+            logger.info("Button 'Далее' was clicked");
 
             WebElement registration = driver.findElement(By.xpath("//button[contains(text(), 'Регистрация на игру')]"));
             registration.click();
+            logger.info("Button 'Регистрация на игру' was clicked");
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            logger.info("Waiting 10 sec");
             logger.info("Закрытие браузера.");
             // Закрыть браузер
             driver.quit();
