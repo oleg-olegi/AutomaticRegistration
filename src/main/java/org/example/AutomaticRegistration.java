@@ -66,7 +66,7 @@ public class AutomaticRegistration {
         LocalDateTime now = LocalDateTime.now();
 
         // Проверка, является ли сегодня понедельником и время 12.00
-        if (now.getDayOfWeek() == DayOfWeek.MONDAY && now.getHour() == 12 && now.getMinute() == 0) {
+        if (DayOfWeek.MONDAY == now.getDayOfWeek() && 12 == now.getHour() && 0 == now.getMinute()) {
             driver.navigate().refresh();
             // Поиск элемента, содержащего текст "туц,туц"
             //WebElement elementWithText = driver.findElement(By.xpath("//*[contains(text(), 'Туц Туц')]"));
